@@ -11,13 +11,19 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      - name: Deploy
-        run: |
-          git config --global user.name "${GITHUB_ACTOR}"
-          git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-          git checkout -b gh-pages
-          git add index.html css/style.css
-          git commit -m "Deploy index.html and css/style.css to GitHub Pages"
-          git push --force origin gh-pages
+      #- name: Deploy
+      #  run: |
+      #    git config --global user.name "${GITHUB_ACTOR}"
+      #    git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+      #    git checkout -b gh-pages
+      #    git add index.html css/style.css
+      #    git commit -m "Deploy index.html and css/style.css to GitHub Pages"
+      #    git push --force origin gh-pages
+      - name: 'Deploy To Branch'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          publish_branch: gh-pages
+          publish_dir: ./
+          github_token: ${{ secrets.GITHUB_TOKEN }}
