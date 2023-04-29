@@ -11,18 +11,24 @@ body footer .container-fluid{
     background: #61c658;
     font-size: large;
 }
-
-footer div.col-md-4:first-child p{
+footer #footerDate {
     display: flex;
     justify-content:  center;
     align-items: center;
     height: 100%;
+    color: blanchedalmond; 
 }
-footer div.col-md-4:last-child p {
+footer #footerTop {
     display: flex;
     justify-content:  center;
     align-items: center;
-    height: 100%;
+    height: 100%;    
+}
+footer #footerGithubUrl {
+    display: flex;
+    justify-content:  center;
+    align-items: center;
+    height: 100%;    
 }
 
 h2 {
