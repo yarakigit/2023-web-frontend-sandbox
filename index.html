@@ -38,14 +38,40 @@
     <footer>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-4 offset-md-4">
-                    <p><a href="#top">トップ</a></p>
+                <div class="col-md-4">
+                    <p id="footerDate">xxxx/xx/xx/xx:xx</p>
                 </div>
                 <div class="col-md-4">
-                    <p><a href="https://github.com/yarakigit">yarakigit</a></p>
+                    <p id="footerTop"><a href="#top">トップ</a></p>
+                </div>
+                <div class="col-md-4">
+                    <p id="footerGithubUrl"><a href="https://github.com/yarakigit">yarakigit</a></p>
                 </div>
             </div>
         </div>
     </footer>
+    <script>
+        var datePrint = function() {
+            // 現在の日時を取得
+            var now = new Date();
+
+            // 日時の各値を取得
+            var year = now.getFullYear(); // 西暦
+            var month = now.getMonth() + 1; // 月
+            var day = now.getDate(); // 日
+            var hour = now.getHours(); // 時間
+            var minute = now.getMinutes(); // 分
+
+            // テキストを生成
+            var datetime = year + '/' + month + '/' + day + ' ' + hour + ':' + minute;
+
+            // テキストを表示
+            console.log(datetime); // 例: "2023/4/29 15:30"
+
+            document.getElementById('footerDate').innerHTML = datetime;
+        }
+        datePrint()
+        timer_id = setInterval(datePrint, 60*1000);
+    </script>
 </body>
 </html>
