@@ -60,11 +60,11 @@
             var now = new Date();
 
             // 日時の各値を取得
-            var year = now.getFullYear(); // 西暦
-            var month = now.getMonth() + 1; // 月
-            var day = now.getDate(); // 日
-            var hour = now.getHours(); // 時間
-            var minute = now.getMinutes(); // 分
+            var year = now.getFullYear().toString(); // 西暦
+            var month = (now.getMonth() + 1).toString().padStart(2, '0'); // 月
+            var day = now.getDate().toString().padStart(2, '0'); // 日
+            var hour = now.getHours().toString().padStart(2, '0'); // 時間
+            var minute = now.getMinutes().toString().padStart(2, '0'); // 分
 
             // テキストを生成
             var datetime = year + '/' + month + '/' + day + ' ' + hour + ':' + minute;
