@@ -41,4 +41,6 @@ footer #footerGithubUrl {
 h2 {
     padding-left: 20px;
     font-family: 'DotGothic16', sans-serif;
+    padding-top: 5px ;
+    padding-bottom: 5px;
 }

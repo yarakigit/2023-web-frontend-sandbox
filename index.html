@@ -35,6 +35,20 @@
         <li class="list-group-item"><a href="https://fonts.google.com/" target="_blank" rel="noopener noreferrer">Google Fonts</a></li>
         <li class="list-group-item"><a href="https://emmet.io/" target="_blank" rel="noopener noreferrer">Emmet</a></li>
     </ul>
+    <h2><a id="transposeEra">西暦を年号に変換</a></h2>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <input type="text" id="input-field" class="form-control" placeholder="例)2022">
+            </div>
+            <div class="col-md-6">
+                <button id="submit-btn" class="btn btn-primary">送信</button>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div id="transposeEra_unit"></div>
+    </div>
     <footer>
         <div class="container-fluid">
             <div class="row">
@@ -93,6 +107,32 @@
                 this.innerHTML = '<span class="material-symbols-outlined">toggle_off</span>';   
                 this.classList.add('disabled');
             }
+        });
+
+        document.getElementById('submit-btn').addEventListener('click', function() {
+            var paragraph = document.getElementById("outputEra");
+            if (paragraph != null) {
+                paragraph.remove();
+            }
+            const inputText = document.getElementById('input-field').value;
+            var year = inputText;
+            var url = "https://script.google.com/macros/s/AKfycbwpSMG9t3CJNJfQbOkXyQpkuAYtylPsKByWtA0ZjKwFAdmzqvZ-Ztq1wVAGsICtISPs/exec?year=" + year;
+        
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", url);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                    var eraData = JSON.parse(xhr.responseText);
+                    console.log(eraData.era);
+                    var pObj = document.createElement('p');
+                    pObj.id = 'outputEra'
+                    pObj.innerHTML = eraData.era;
+                    pObj.classList.add('text-left');
+                    document.getElementById('transposeEra_unit').appendChild(pObj);
+                } 
+            };
+            xhr.send();
+            console.log(inputText);
         });
     </script>
 </body>
