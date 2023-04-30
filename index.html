@@ -38,7 +38,10 @@
     <footer>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-1">
+                    <p id="footerDatebutton"><button id="button_footerDatebutton" class="btn btn-outline-light" type="button"><span class="material-symbols-outlined">toggle_on</span></button></p>
+                </div>
+                <div class="col-md-3">
                     <p id="footerDate">xxxx/xx/xx/xx:xx</p>
                 </div>
                 <div class="col-md-4">
@@ -52,6 +55,7 @@
     </footer>
     <script>
         var datePrint = function() {
+            //console.log("hire is datePrint function")
             // 現在の日時を取得
             var now = new Date();
 
@@ -66,12 +70,30 @@
             var datetime = year + '/' + month + '/' + day + ' ' + hour + ':' + minute;
 
             // テキストを表示
-            console.log(datetime); // 例: "2023/4/29 15:30"
+            //console.log(datetime); // 例: "2023/4/29 15:30"
 
             document.getElementById('footerDate').innerHTML = datetime;
         }
         datePrint()
-        timer_id = setInterval(datePrint, 60*1000);
+        datetimeId = setInterval(datePrint, 60*1000);
+
+        document.getElementById('button_footerDatebutton').addEventListener('click', function() {
+            //console.log('click footer button')
+            //console.log(this.innerHTML)
+            if (this.innerHTML === '<span class="material-symbols-outlined">toggle_off</span>') {
+                //console.log('if toggle_off2on')
+                datePrint()
+                datetimeId = setInterval(datePrint, 60*1000);
+                this.innerHTML = '<span class="material-symbols-outlined">toggle_on</span>';
+                this.classList.remove('disabled');
+            } else {
+                //console.log('if toggle_on2off')
+                document.getElementById('footerDate').innerHTML = null;
+                clearInterval(datetimeId);
+                this.innerHTML = '<span class="material-symbols-outlined">toggle_off</span>';   
+                this.classList.add('disabled');
+            }
+        });
     </script>
 </body>
 </html>

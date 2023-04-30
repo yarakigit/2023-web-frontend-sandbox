@@ -11,6 +11,13 @@ body footer .container-fluid{
     background: #61c658;
     font-size: large;
 }
+footer #footerDatebutton {
+    display: flex;
+    justify-content:  center;
+    align-items: center;
+    height: 100%;
+    color: blanchedalmond; 
+}
 footer #footerDate {
     display: flex;
     justify-content:  center;
