@@ -61,6 +61,10 @@
             <p id="pcntOutput">text_length:{{ cnt.text_length }},space_count:{{ cnt.space_count }}</p>
         </div>
     </div>
+    <div id="app">
+        <p>{{ message }}</p>
+        <button @click="updateMessage">Update Message</button>
+    </div>
     <footer>
         <div class="container-fluid">
             <div class="row">
@@ -163,7 +167,7 @@
                     }
                 },
                 created() {
-                    
+                
                     fetch(url)
                         .then(response => response.json())
                         .then(data => {
@@ -178,6 +182,20 @@
             });    
             app.mount('#cnt_output_unit');
         })
+
+        const app = Vue.createApp({
+            data() {
+                return {
+                    message: 'Hello, world!'
+                }
+            },
+            methods: {
+                updateMessage() {
+                    this.message = Math.floor(Math.random() * 11);
+            }
+        }
+})
+app.mount('#app')
     </script>
 </body>
 </html>
