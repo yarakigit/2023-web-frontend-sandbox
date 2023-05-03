@@ -51,6 +51,16 @@
     <div class="container-fluid">
         <div id="transposeEra_unit"></div>
     </div>
+    <h2><a id="cntStrnum">半角の文字数とスペースの数をカウント</a></h2>
+    <div class="container-fluid">
+        <input type="text" id="input-field-cnt" class="form-control" placeholder="example)hello world">        
+        <button id="submit-btn-cnt" class="btn btn-primary">送信</button>
+    </div>
+    <div id="cnt_output_unit">
+        <div class="cnts" v-for="cnt in cnts" :key="cnt.id">
+            <p id="pcntOutput">text_length:{{ cnt.text_length }},space_count:{{ cnt.space_count }}</p>
+        </div>
+    </div>
     <footer>
         <div class="container-fluid">
             <div class="row">
@@ -69,6 +79,7 @@
             </div>
         </div>
     </footer>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script>
         var datePrint = function() {
             //console.log("hire is datePrint function")
@@ -136,6 +147,37 @@
             xhr.send();
             console.log(inputText);
         });
+
+        document.getElementById('submit-btn-cnt').addEventListener('click', function() {
+            //var paragraph = document.getElementById("pcntOutput");
+            //if (paragraph != null) {
+            //    paragraph.remove();
+            //}
+            const inputText = document.getElementById('input-field-cnt').value;
+            var text = inputText;
+            var url = "https://script.google.com/macros/s/AKfycbwW_5PSn-uHoeclmZ6nWTXNFXGmbCLA7NoTLB4JKsalL7S7KffkRmOL4mIgV5TaBnQqdg/exec?text=" + text;
+            const app = Vue.createApp({
+                data() {
+                    return {
+                        cnts: []
+                    }
+                },
+                created() {
+                    
+                    fetch(url)
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log(data);
+                            const length = Object.keys(data).length;
+                            console.log(length);
+                            this.cnts = data;
+                            })
+                        .catch(error => {console.log(error)});
+                    
+                }
+            });    
+            app.mount('#cnt_output_unit');
+        })
     </script>
 </body>
 </html>
